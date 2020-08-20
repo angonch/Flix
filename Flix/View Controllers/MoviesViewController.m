@@ -8,7 +8,9 @@
 
 #import "MoviesViewController.h"
 
-@interface MoviesViewController ()
+@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 // "property" makes private instance variable and automatically makes a getter/setter
 // "strong" holds on to reference, increments retain count of movies
@@ -20,7 +22,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    // setting to self calls this object to do the required methods
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     
     // set up: url, request, and session
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
@@ -38,19 +43,35 @@
                
                NSLog(@"%@", dataDictionary);
                
+               // TODO: Get the array of movies
+               // TODO: Store the movies in a property to use elsewhere
+               // TODO: Reload your table view data
+               
                // array of movies from "results" key
                self.movies = dataDictionary[@"results"];
                for (NSDictionary *movie in self.movies) { // check to see movies
                    NSLog(@"%@", movie[@"title"]);
                }
-               // TODO: Get the array of movies
-               // TODO: Store the movies in a property to use elsewhere
-               // TODO: Reload your table view data
+               
+               // reload table view
+               [self.tableView reloadData];
            }
        }];
     [task resume];
 }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.movies.count;
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    
+    // access movie of interest - movie associated with row
+    NSDictionary *movie = self.movies[indexPath.row];
+    cell.textLabel.text = movie[@"title"];
+    
+    return cell;
+}
 /*
 #pragma mark - Navigation
 
