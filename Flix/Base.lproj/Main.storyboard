@@ -62,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Details View Controller-->
         <scene sceneID="pdI-Gh-ipy">
             <objects>
-                <viewController id="UJ8-y2-7a5" sceneMemberID="viewController">
+                <viewController id="UJ8-y2-7a5" customClass="DetailsViewController" sceneMemberID="viewController">
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="f6B-fq-cJ9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -99,6 +99,12 @@
                         <viewLayoutGuide key="frameLayoutGuide" id="XUf-m0-w9R"/>
                     </scrollView>
                     <navigationItem key="navigationItem" id="XKf-rM-ml9"/>
+                    <connections>
+                        <outlet property="backdropView" destination="AxI-Ze-FxG" id="3bT-im-o0k"/>
+                        <outlet property="posterView" destination="Qm9-nu-mo5" id="u4G-sq-0rj"/>
+                        <outlet property="synopsisLabel" destination="UTx-xB-oJI" id="aYx-QJ-iLg"/>
+                        <outlet property="titleLabel" destination="4Jd-aD-IiZ" id="Iwy-ds-mx9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZHF-Bn-7P0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
