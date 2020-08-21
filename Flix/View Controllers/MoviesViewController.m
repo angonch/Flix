@@ -8,6 +8,7 @@
 
 #import "MoviesViewController.h"
 #import "MovieCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -75,6 +76,16 @@
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"overview"];
     
+    // format URL for image of movie
+    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
+    NSString *posterURLString = movie[@"poster_path"];
+    NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
+    
+    // create URL from string
+    NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
+    
+    // set image with URL (using imported category function from pod)
+    [cell.posterView setImageWithURL:posterURL];
     
     return cell;
 }
