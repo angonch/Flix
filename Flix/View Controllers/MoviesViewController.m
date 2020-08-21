@@ -85,6 +85,7 @@
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     
     // set image with URL (using imported category function from pod)
+    cell.posterView.image = nil; // clear out old image before so it doesn't flicker
     [cell.posterView setImageWithURL:posterURL];
     
     return cell;
