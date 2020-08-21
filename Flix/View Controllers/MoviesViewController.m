@@ -31,7 +31,15 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    // get movies/ load up table view
     [self fetchMovies];
+    
+    // add refresh control to tableview
+    // addtarget - call fetch events when refreshed
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
 }
 
 - (void)fetchMovies {
@@ -64,6 +72,8 @@
                // reload table view
                [self.tableView reloadData];
            }
+        // stop refresh control
+        [self.refreshControl endRefreshing];
        }];
     [task resume];
 }
