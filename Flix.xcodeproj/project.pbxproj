@@ -16,6 +16,7 @@
 		ABED97A824EEF2CB0033BEF9 /* FlixTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABED97A724EEF2CB0033BEF9 /* FlixTests.m */; };
 		ABED97B324EEF2CB0033BEF9 /* FlixUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABED97B224EEF2CB0033BEF9 /* FlixUITests.m */; };
 		ABED97C224EEF76F0033BEF9 /* MoviesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABED97C124EEF76F0033BEF9 /* MoviesViewController.m */; };
+		ABED97C824EF74610033BEF9 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABED97C724EF74610033BEF9 /* MovieCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		ABED97B424EEF2CB0033BEF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABED97C024EEF76F0033BEF9 /* MoviesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoviesViewController.h; sourceTree = "<group>"; };
 		ABED97C124EEF76F0033BEF9 /* MoviesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoviesViewController.m; sourceTree = "<group>"; };
+		ABED97C624EF74610033BEF9 /* MovieCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
+		ABED97C724EF74610033BEF9 /* MovieCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +153,8 @@
 		ABED97C424EEF82B0033BEF9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ABED97C624EF74610033BEF9 /* MovieCell.h */,
+				ABED97C724EF74610033BEF9 /* MovieCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABED978D24EEF2C80033BEF9 /* AppDelegate.m in Sources */,
+				ABED97C824EF74610033BEF9 /* MovieCell.m in Sources */,
 				ABED97C224EEF76F0033BEF9 /* MoviesViewController.m in Sources */,
 				ABED979E24EEF2CB0033BEF9 /* main.m in Sources */,
 				ABED979024EEF2C80033BEF9 /* SceneDelegate.m in Sources */,
