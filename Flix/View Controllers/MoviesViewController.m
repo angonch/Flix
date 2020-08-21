@@ -18,6 +18,8 @@
 // "strong" holds on to reference, increments retain count of movies
 @property (nonatomic, strong) NSArray *movies;
 
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+
 @end
 
 @implementation MoviesViewController
@@ -29,6 +31,10 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    [self fetchMovies];
+}
+
+- (void)fetchMovies {
     // set up: url, request, and session
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
@@ -61,6 +67,7 @@
        }];
     [task resume];
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.movies.count;
 }
