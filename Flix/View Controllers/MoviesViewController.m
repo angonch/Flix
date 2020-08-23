@@ -11,13 +11,17 @@
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
 
-@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 // "property" makes private instance variable and automatically makes a getter/setter
 // "strong" holds on to reference, increments retain count of movies
 @property (nonatomic, strong) NSArray *movies;
+
+@property (nonatomic, strong) NSArray *filteredMovies;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -31,6 +35,9 @@
     // setting to self calls this object to do the required methods
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    // set search bar
+    self.searchBar.delegate = self;
     
     // get movies/ load up table view
     [self fetchMovies];
@@ -69,6 +76,7 @@
                for (NSDictionary *movie in self.movies) { // check to see movies
                    NSLog(@"%@", movie[@"title"]);
                }
+               self.filteredMovies = self.movies;
                
                // reload table view
                [self.tableView reloadData];
@@ -80,7 +88,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.movies.count;
+    return self.filteredMovies.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,7 +98,7 @@
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     
     // access movie of interest - movie associated with row
-    NSDictionary *movie = self.movies[indexPath.row];
+    NSDictionary *movie = self.filteredMovies[indexPath.row];
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"overview"];
     
@@ -109,6 +117,23 @@
     return cell;
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length != 0) {
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title contains[cd] %@", searchText];
+        
+        self.filteredMovies = [self.movies filteredArrayUsingPredicate:predicate];
+        
+        NSLog(@"%@", self.filteredMovies);
+        
+    }
+    else {
+        self.filteredMovies = self.movies;
+    }
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -120,7 +145,7 @@
     // id = table view cell that was tapped on
     UITableViewCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    NSDictionary *movie = self.movies[indexPath.row];
+    NSDictionary *movie = self.filteredMovies[indexPath.row];
     
     DetailsViewController *detailsViewController = [segue destinationViewController];
     // set public property to be the selected movie
